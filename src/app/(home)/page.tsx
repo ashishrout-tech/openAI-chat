@@ -14,13 +14,13 @@ export default function Home() {
 
   async function onSubmit() {
     setInput("");
-    console.log(input);
+    
     const updatedMsg: TMessage[] = [...msg, {role: "user", content: input}]
     setMsg(updatedMsg);
     try {
       startStream(updatedMsg);
     } catch (error) {
-      console.warn(error);
+      
     }
   }
 
