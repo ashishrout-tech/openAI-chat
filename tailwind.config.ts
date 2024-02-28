@@ -1,4 +1,12 @@
 import type { Config } from "tailwindcss";
+import colors from 'tailwindcss/colors'
+
+const obj: Record<string, any> = {};
+Object.keys(colors).forEach((ele) => {
+  if(ele in colors){
+    obj[ele] = (colors as any)[ele];
+  }
+})
 
 const config: Config = {
   content: [
@@ -14,6 +22,11 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    colors: {
+      primary: '#212121',
+      secondary: '#ecc94b',
+      ...obj
+    }
   },
   plugins: [],
 };
