@@ -2,7 +2,6 @@ import { messageSchema } from "@/app/types";
 import openai from "@/lib/openApi";
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const schema = z.array(messageSchema);
@@ -23,8 +22,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 const data = chunk.choices[0]?.delta?.content || "";
                 process.stdout.write(chunk.choices[0]?.delta?.content || "");
                 res.write(data);
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
             res.write("END STREAM");
+            await new Promise(resolve => setTimeout(resolve, 100));
             res.end();
             return;
     
